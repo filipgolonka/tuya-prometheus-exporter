@@ -36,8 +36,13 @@ const getVoltage = async () => {
 };
 
 app.get('/metrics', async (req, res) => {
-    const voltage = await getVoltage();
-    res.send(`Voltage ${voltage}`);
+    try {
+        const voltage = await getVoltage();
+        res.send(`Voltage ${voltage}`);
+    } catch (e) {
+        console.log(e);
+        res.send(`Voltage 0.0`);
+    }
 })
 
 const port = 4002;
